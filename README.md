@@ -16,11 +16,41 @@ off. The long natural-language prompts follow Krea's prompting guidance and are
 meant to be edited in the orange subgraph node.
 
 Install the four model files, both workflows, and the two supplied reference
-images into this machine's Comfy Desktop instance with:
+images into this machine's Comfy Desktop instance on macOS with:
 
 ```zsh
 ./setup_krea2_game_art.sh
 ```
+
+On Windows PowerShell, pass either the ComfyUI directory or the parent portable
+directory. Reference-image arguments are optional; when omitted, select images
+in the two `LoadImage` nodes after opening the workflows.
+
+```powershell
+Set-ExecutionPolicy -Scope Process Bypass
+./setup_krea2_game_art.ps1 `
+  -ComfyRoot "C:\AI\ComfyUI_windows_portable" `
+  -IconReference "C:\game-art\resonant-robe.png" `
+  -PortraitReference "C:\game-art\neutral.png"
+```
+
+For a ComfyUI Desktop or shared-model arrangement, override the destinations:
+
+```powershell
+./setup_krea2_game_art.ps1 `
+  -ComfyRoot "C:\path\to\ComfyUI" `
+  -ModelsRoot "D:\ComfyUI-Shared\models"
+```
+
+Use `-SkipModels` to install only the workflows and optional references. The
+Windows installer requires `curl.exe`, included with supported Windows 10 and
+Windows 11 systems, so interrupted downloads can resume.
+
+For operating the Windows machine as a generator for trusted clients on the
+same LAN, follow the
+[Windows LAN runbook](docs/windows-lan-krea2-runbook.md). It covers private
+firewall rules, startup, connectivity checks, API workflow export, request
+lifecycle, troubleshooting, and disabling LAN access.
 
 The download is approximately 19.5 GB (18.1 GiB) and resumes interrupted files.
 Published SHA-256 hashes are checked before installation. Restart ComfyUI after
